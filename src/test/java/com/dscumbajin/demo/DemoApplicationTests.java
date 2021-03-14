@@ -1,6 +1,7 @@
 package com.dscumbajin.demo;
 
 import com.dscumbajin.demo.srv.ErubroSrv;
+import com.dscumbajin.demo.srv.ProcesoSrv;
 import com.dscumbajin.demo.srv.RubroSrv;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +17,12 @@ class DemoApplicationTests {
     RubroSrv rubroSrv;
     @Autowired
     ErubroSrv erubroSrv;
+    @Autowired
+    ProcesoSrv procesoSrv;
 
     @Test
     void contextLoads() {
-        List<String> codpros= new ArrayList<>();
-        codpros.add("101MPFBCAJ0066");
-        codpros.add("101MPFBIFB1335");
-        codpros.add("101MPFBIFB1330");
-        codpros.add("106PLACNEG0010");
-        codpros.add("106PLACPOS0019");
-        codpros.add("REFINAP0001");
-        codpros.add("101MPFBSEP0001");
-        codpros.add("101MPFBTAP0334");
-        var list  = erubroSrv.findByCodpro(codpros);
-        System.out.println(list);
+        procesoSrv.proceso("201BATEECUE3-42-FE");
     }
 
 }
