@@ -7,9 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @SpringBootTest
 class DemoApplicationTests {
 
@@ -22,7 +19,7 @@ class DemoApplicationTests {
 
     @Test
     void contextLoads() {
-        procesoSrv.proceso("201BATEECUE3-42-FE");
+        procesoSrv.proceso("201BATEECUE3-30H-FEI");
     }
 
 }
