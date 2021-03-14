@@ -25,30 +25,31 @@ public class ProcesoSrv {
         if(primer.size()>0){
             List<Integer> coderubs = primer.stream().map(Erubro::getCoderub).collect(Collectors.toList());
             List<Rubro> rubros = rubroSrv.findByCoderub(coderubs);
-            if(rubros.size()>0){
+            if (rubros.size() > 0) {
                 for (Rubro rubro : rubros) {
-                    System.out.println(rubro); //mandar al excel
+                    System.out.print(rubro.getCodsecrub() + " "); //mandar al excel
                 }
             }
-            while (rubros.size()>0){
-                recusrsiveProcees(rubros);
-            }
+            System.out.println("aqui empezamos");
+            recusrsiveProcees(rubros, 1);
         }
     }
 
-    public void recusrsiveProcees(List<Rubro> rubros){
+    public void recusrsiveProcees(List<Rubro> rubros, int i) {
+        System.out.println("piso" + i);
         List<String> codpros = rubros.stream().filter(rubro -> !rubro.getCodpro().equals("0")).map(Rubro::getCodpro).collect(Collectors.toList());
         List<Erubro> erubros = erubroSrv.findByCodpro(codpros);
         List<Integer> coderubs = erubros.stream().map(Erubro::getCoderub).collect(Collectors.toList());
         rubros = rubroSrv.findByCoderub(coderubs);
-        if(rubros.size()>0){
+        if (rubros.size() > 0) {
             for (Rubro rubro : rubros) {
-                System.out.println(rubro);//excel
-                if(!rubro.getCodpro().equals("0")){
-                List<Erubro> erubrosTmp = erubroSrv.findByCodpro(rubro.getCodpro());
-                List<Integer> coderubsTmp = erubrosTmp.stream().map(Erubro::getCoderub).collect(Collectors.toList());
-                List<Rubro> rubrosTmp = rubroSrv.findByCoderub(coderubsTmp);
-                recusrsiveProcees(rubrosTmp);}
+                System.out.print(rubro.getCodsecrub() + " "); //mandar al excel
+                if (!rubro.getCodpro().equals("0")) {
+                    List<Erubro> erubrosTmp = erubroSrv.findByCodpro(rubro.getCodpro());
+                    List<Integer> coderubsTmp = erubrosTmp.stream().map(Erubro::getCoderub).collect(Collectors.toList());
+                    List<Rubro> rubrosTmp = rubroSrv.findByCoderub(coderubsTmp);
+                    recusrsiveProcees(rubrosTmp, i + 1);
+                }
             }
         }
     }
