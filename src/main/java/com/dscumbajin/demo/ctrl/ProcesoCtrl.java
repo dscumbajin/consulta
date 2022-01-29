@@ -1,12 +1,13 @@
 package com.dscumbajin.demo.ctrl;
 
 import com.dscumbajin.demo.srv.ProcesoSrv;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Base64;
+import java.util.Map;
 
 @RestController
 public class ProcesoCtrl {
@@ -17,9 +18,11 @@ public class ProcesoCtrl {
         this.procesoSrv = procesoSrv;
     }
 
-    @GetMapping(value = "/api/export", params = "cod")
-    public ResponseEntity<byte[]> exportExcel(@RequestParam String cod) throws IOException {
-        return procesoSrv.proceso(cod);
+    @GetMapping(value = "/api/export", params = "data")
+    public ResponseEntity<byte[]> export(@RequestParam String data) throws IOException{
+        return (ResponseEntity<byte[]>) procesoSrv.dowload(data);
     }
+
+
 
 }
